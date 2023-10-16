@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISSERTATION ON PLAGIARISM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="background-image"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand ml-auto" href="{{ url_for ('index')}}" style="color: white;">PLAGIARISM TOOLS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-light">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('upload_file') }}">Upload File</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4 text-container">
+        <h2>Welcome to the Plagiarism Tools Application</h2>
+        <p>This website provides you various tool for plagiarism detection and code analysis.</p>      
+    </div>
+
+    <div class="container mt-4 text-content">
+        <h2>Examples of Plagiarism Detection Scenarios</h2>
+    
+        <h3>Scenario 1: Code Similarity Analysis</h3>
+        <p><strong>Input:</strong> Upload two Python files, "file1.py" and "file2.py."</p>
+        <p><strong>Analysis:</strong> The tools analyze the code structure, variable names, and logic.</p>
+        <p><strong>Results:</strong></p>
+        <ul>
+            <li>Similarity Percentage: 78%</li>
+            <li>TF-IDF Similarity: 0.89</li>
+            <li>Cosine Similarity: 0.94</li>
+            <li>Response Time: 0.52 seconds</li>
+        </ul>
+    </div>
+        
+    <div class="container mt-4 content">
+        <h3>Scenario 2: Multi-File Comparison</h3>
+        <p><strong>Input:</strong> Upload a set of Java files from two different folders.</p>
+        <p><strong>Analysis:</strong> The tools compare all Java files within the selected folders.</p>
+        <p><strong>Results:</strong></p>
+        <ul>
+            <li>Similarity Percentage: 62%</li>
+            <li>TF-IDF Similarity: 0.75</li>
+            <li>Cosine Similarity: 0.82</li>
+            <li>Response Time: 1.26 seconds</li>
+        </ul>
+    </div>
+
+    <div class="container mt-4 content">
+        <h3>Scenario 3: Real-time Analysis</h3>
+        <p><strong>Input:</strong> Upload a Python code snippet and compare it to a large Java codebase.</p>
+        <p><strong>Analysis:</strong> The tools process the snippet and analyze it against the entire Java codebase in real-time.</p>
+        <p><strong>Results:</strong></p>
+        <ul>
+            <li>Similarity Percentage: 42%</li>
+            <li>TF-IDF Similarity: 0.61</li>
+            <li>Cosine Similarity: 0.71</li>
+            <li>Response Time: 2.89 seconds</li>
+        </ul>
+    </div>
+
+
+    <div class="container mt-4 content">
+        <h3>Scenario 4: Code Evolution Tracking</h3>
+        <p><strong>Input:</strong> Upload multiple versions of a Python project to track code evolution.</p>
+        <p><strong>Analysis:</strong> The tools analyze the code structure, variable names, and logic.</p>
+        <p><strong>Results:The tools generate a timeline of code evolution, highlighting significant modifications</strong></p>
+        <ul>
+            <li>Similarity Percentage: 78%</li>
+            <li>TF-IDF Similarity: 0.89</li>
+            <li>Cosine Similarity: 0.94</li>
+            <li>Response Time: 0.52 seconds</li>
+        </ul>
+    </div>
+
+
+    <footer class="footer py-3">
+        <div class="container text-center">
+            <span class="text-muted">&copy; 2023 Plagiarism Tools App. All rights reserved.</span>
+        </div>
+    </footer>
+    
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Include Bootstrap CSS and JS here -->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand ml-auto" href="{{ url_for('index')}}" style="color: rgb(248, 243, 243);">PLAGIARISM</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('upload_file') }}">Upload File</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('plagiarism') }}">Plagiarism Checker</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const file1Input = document.getElementById('file1');
+            const file2Input = document.getElementById('file2');
+
+            if (!isFileTypeAllowed(file1Input) || !isFileTypeAllowed(file2Input)) {
+                e.preventDefault(); // Prevent form submission
+                alert('Please select valid file types (e.g., .py, .java)');
+            }
+        });
+
+        function isFileTypeAllowed(input) {
+            const allowedFileTypes = ['.py', '.java']; // Add more allowed file extensions if needed
+            const fileName = input.value;
+            const fileType = fileName.slice(((fileName.lastIndexOf(".") - 1) >>> 0) + 2);
+
+            return allowedFileTypes.includes('.' + fileType);
+        }
+    </script>
+
+
+    <div class="container mt-4">
+        <h2>Plagiarism Checker</h2>
+        <marquee class="css1" direction="left" scrollamount="2">INSTRUCTIONS: Click on the "Browse" to load your files in "Upload File 1" and "Upload File 2" respectively and submit your query by clicking on "Check Plagiarism" below.</marquee>
+        <form action="{{ url_for('plagiarism') }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file1">Upload File 1:</label>
+                <input type="file" class="form-control-file" id="file1" name="file1">
+            </div>
+            <div class="form-group">
+                <label for="file2">Upload File 2:</label>
+                <input type="file" class="form-control-file" id="file2" name="file2">
+            </div>
+            <div class="form-group">
+                <label for="threshold">Similarity Threshold (%):</label>
+                <input type="number" class="form-control" id="threshold" name="threshold" min="0" max="100" value="70">
+            </div>
+            <button type="submit" class="btn btn-primary">Check Plagiarism</button>
+        </form>
+
+        <!-- <form method="POST" enctype="multipart/form-data">
+            <label for="folder1">Upload Zip Folder 1:</label>
+            <input type="file" name="folder1" id="folder1" accept=".zip" required>
+        
+            <label for="folder2">Upload Zip Folder 2:</label>
+            <input type="file" name="folder2" id="folder2" accept=".zip" required>
+        
+            <label for="threshold">Similarity Threshold:</label>
+            <input type="number" name="threshold" id="threshold" min="0" max="100" required>
+        
+            <input type="submit" value="Check Plagiarism">
+        </form> -->
+
+        <!-- <form method="POST" action="/upload">
+            <input type="text" name="user_code">
+            <!-- Other form fields -->
+        
+            <!-- <input type="submit" value="Submit">
+        </form> --> 
+
+
+<!-- ... Your existing template content ... -->
+
+
+        <!-- ... Your existing plagiarism form ... -->
+
+        <!-- <form action="{{ url_for('generate_pdf') }}" method="post">
+            <div class="form-group">
+                <label for="comparisonResult">Comparison Result:</label>
+                <select class="form-control" id="comparisonResult" name="comparisonResult">
+                    <option value="Plagiarized">Plagiarized</option>
+                    <option value="Not Plagiarized">Not Plagiarized</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Generate PDF</button>
+        </form> -->
+
+
+        <style>
+            .highlighted {
+                background-color: yellow;
+            }
+        </style>        
+
+        <!-- Display plagiarism results -->
+        {% if plagiarism_results %}
+        <div class="mt-4">
+            <h4>Plagiarism Results:</h4>
+            <p>Similarity Score: {{ plagiarism_results.similarity_score }}%</p>
+            <p>Cosine Similarity: {{ plagiarism_results.cosine_similarity }}</p>
+            <p>TF-IDF Similarity: {{ plagiarism_results.tfidf_similarity }}</p>
+            <p>Files Matched: {{ plagiarism_results.matched_files }}</p>
+            <p>Comparison Result: {{ plagiarism_results.comparison_result }}</p>
+            <p>Response Time: {{ plagiarism_results.response_time }}</p>
+            <p>AST1 Result: {{ plagiarism_results.ast1 }}</p>
+            <p>AST2 Result: {{ plagiarism_results.ast2 }}</p>
+            <!-- <p>Response Time: {{ response_time_formatted }} seconds</p> -->
+        </div>
+
+        <!-- Display AST information -->
+        {% if plagiarism_results.ast1 %}
+        <div class="mt-4">
+            <h5>AST for {{ plagiarism_results.matched_files.split(',')[0] }}:</h5>
+            <pre>
+                {{ plagiarism_results.ast1 }}
+            </pre>
+        </div>
+        {% endif %}
+        
+        {% if plagiarism_results.ast2 %}
+        <div class="mt-4">
+            <h5>AST for {{ plagiarism_results.matched_files.split(',')[1] }}</h5>
+            <pre>
+                {{ plagiarism_results.ast2 }}
+            </pre>
+        </div>
+        {% endif %}
+        
+
+        <!-- Display the matched files with highlighted similarities -->
+        {% if highlighted_content1 and highlighted_content2 %}
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h4>{{ plagiarism_results.matched_files.split(',')[0] }}</h4>{{ highlighted_content1|safe }}
+            </div>
+            <div class="col-md-6">
+                <h4>{{ plagiarism_results.matched_files.split(',')[1] }}</h4>{{ highlighted_content2|safe }}
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+
+        <!-- Add a link to pdf_generatedF -->
+        {% if pdf_generated %}
+        <div class="mt-4">
+            <h4>PDF Generated:</h4>
+            <p>PDF generated successfully!</p>
+            <p><a href="{{ url_for('download_pdf', pdf_filename=plagiarism_results.pdf_filename) }}" class="btn btn-primary">Download PDF</a></p>
+        </div>
+        {% endif %}
+
+        <!-- Display PDF download link if PDF is generated -->
+        {% if plagiarism_results.pdf_filename %}
+        <div class="mt-4">    
+            <h4>Download PDF:</h4>
+            <p><a href="{{ url_for('download_pdf', pdf_filename=plagiarism_results.pdf_filename) }}" class="btn btn-primary">Download PDF</a></p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Include Bootstrap JS and any additional scripts here -->
+</body>
+</html>

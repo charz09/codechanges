@@ -1,0 +1,50 @@
+.navbar-nav {
+    margin-left: auto; /* Push the menu items to the left */
+}
+
+.navbar-brand {
+    margin-right: 15px; /* Add some space between the brand/logo and menu items */
+}
+
+.footer {
+    color: rgb(205, 12, 12);
+}
+
+
+body {
+        background-image: url('/static/img/background.jpg');
+        background-size: 200px 150px;
+        background-repeat: no-repeat;
+        background-color: rgba(255, 255, 255, 0.9);
+        background-position-x: 200%; /* Adjust as needed */
+    } 
+
+.css1 {
+    background-color: rgb(151, 14, 30);
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: italic;
+    color: aqua;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.plagiarism-results {
+padding: 20px;
+border: 1px solid #ddd;
+border-radius: 4px;
+}
+
+/* CSS for large screens (desktops) */
+@media (min-width: 992px) {
+    /* Add your styles here */
+}
+
+/* CSS for medium screens (tablets) */
+@media (min-width: 768px) and (max-width: 991px) {
+    /* Add your styles here */
+}
+
+/* CSS for small screens (mobile devices) */
+@media (max-width: 767px) {
+    /* Add your styles here */
+}
